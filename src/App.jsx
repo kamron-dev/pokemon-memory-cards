@@ -12,3 +12,16 @@ function MemoryCard(character) {
   );
 };
 
+function MemoryCardContainer() {
+  // const someArrayThatHoldsCharacters = [];
+
+  return (
+    <div>
+      {
+        // someArray.map(character => {<MemoryCard character={character}/>})
+      }
+    </div>
+  )
+};
+
+
