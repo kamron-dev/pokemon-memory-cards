@@ -1,6 +1,6 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+// import reactLogo from './assets/react.svg'
+// import viteLogo from '/vite.svg'
 import './App.css'
 
 function MemoryCard(character) {
@@ -37,3 +37,16 @@ function ScoreBoard(scores) {
   );
 };
 
+function NameOfTheGame() {
+  return (
+    <div>
+      <h1>Memory Game</h1>
+      <h3>Get points by clicking on an image. Do not click on an image twice!</h3>
+        
+    </div>
+  )
+};
+
+export function App() {
+  
+}
