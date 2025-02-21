@@ -24,4 +24,16 @@ function MemoryCardContainer() {
   )
 };
 
+function ScoreBoard(scores) {
+  return (
+    <div>
+      <h3>
+        Score: {scores.currentScore}
+      </h3>
+      <h3>
+        Best Score: {scores.bestScore}
+      </h3>
+    </div>
+  );
+};
 
