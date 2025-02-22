@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 // import reactLogo from './assets/react.svg'
 // import viteLogo from '/vite.svg'
 import './App.css'
@@ -48,5 +48,18 @@ function NameOfTheGame() {
 };
 
 export function App() {
-  
+  const [pokemons, setPokemons] = useState([]);
+  useEffect(() => {
+    async function getPokemons() {
+      try {
+        const data = await fetch("https://pokeapi.co/api/v2/pokemon?limit=12");
+        const parsed = await data.json();
+        console.log(parsed);
+      } catch (err) {
+        console.error(err);
+      };
+
+    }
+    getPokemons();
+  }, [])
 }
