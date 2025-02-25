@@ -1,11 +1,57 @@
 #root {
   max-width: 1280px;
   margin: 0 auto;
-  padding: 2rem;
+  /* padding: 2rem; */
   text-align: center;
+
+  width: 100vw;
+  height: 100vh;
+
+  box-sizing: border-box;
 }
 
-.logo {
+#game {
+  width: 100%;
+  height: 100%;
+  border: 2px solid red;
+
+  display: grid;
+  grid-template-columns: 90% 10%;
+  grid-template-rows: 20% 80%;
+  grid-template-areas:
+      "header scoreboard"
+      "card-container card-container";
+}
+
+#header {
+  grid-area: header;
+  line-height: 0.2rem;
+  height: 100%;
+  /* justify-self: start; */
+  align-self: start;
+  border: 1px solid green;
+}
+
+#header > * {
+  margin: 15px;
+}
+
+#scoreboard {
+  grid-area: scoreboard;
+  border: 1px solid blue;
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+#card-container {
+  grid-area: card-container;
+  border: 1px solid orange;
+  width: 100%;
+}
+/* .logo {
   height: 6em;
   padding: 1.5em;
   will-change: filter;
@@ -16,7 +62,7 @@
 }
 .logo.react:hover {
   filter: drop-shadow(0 0 2em #61dafbaa);
-}
+} */
 
 @keyframes logo-spin {
   from {
@@ -33,10 +79,10 @@
   }
 }
 
-.card {
+/* .card {
   padding: 2em;
 }
 
 .read-the-docs {
   color: #888;
-}
+} */

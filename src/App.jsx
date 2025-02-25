@@ -16,7 +16,7 @@ function MemoryCardContainer() {
   // const someArrayThatHoldsCharacters = [];
 
   return (
-    <div>
+    <div id="card-container">
       {
         // someArray.map(character => {<MemoryCard character={character}/>})
       }
@@ -24,9 +24,9 @@ function MemoryCardContainer() {
   )
 };
 
-function ScoreBoard(scores) {
+function ScoreBoard({scores}) {
   return (
-    <div>
+    <div id="scoreboard">
       <h3>
         Score: {scores.currentScore}
       </h3>
@@ -39,7 +39,7 @@ function ScoreBoard(scores) {
 
 function NameOfTheGame() {
   return (
-    <div>
+    <div id="header">
       <h1>Memory Game</h1>
       <h3>Get points by clicking on an image. Do not click on an image twice!</h3>
         
@@ -49,6 +49,7 @@ function NameOfTheGame() {
 
 export function App() {
   const [pokemonsData, setPokemonsData] = useState([]);
+  const scores = { currentScore: 0, bestScore: 0 };
   
   useEffect(() => {
     async function getPokemons() {
@@ -83,6 +84,14 @@ export function App() {
       };
     };
     getPokemons();
-  }, [])
+  }, []);
+
+  return (
+    <div id="game">
+      <NameOfTheGame />
+      <ScoreBoard scores={scores} />
+      <MemoryCardContainer/>
+    </div>
+  )
   
 };
