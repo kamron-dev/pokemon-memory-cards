@@ -3,22 +3,26 @@ import { useState, useEffect } from 'react'
 // import viteLogo from '/vite.svg'
 import './App.css'
 
-function MemoryCard(character) {
+function MemoryCard({character}) {
   return (
     <div>
-      <img src={"Character.url or something"} alt="character-picture" />
-      <h3>{"Character.name or something"}</h3>
+      <img src={character.image} alt={`${character.name}-picture`} />
+      <h3>{character.name}</h3>
     </div>
   );
 };
 
-function MemoryCardContainer() {
+function MemoryCardContainer({pokemons}) {
   // const someArrayThatHoldsCharacters = [];
 
   return (
     <div id="card-container">
       {
-        // someArray.map(character => {<MemoryCard character={character}/>})
+        pokemons.map((pokemon) => {
+          return (
+            <MemoryCard key={pokemon.name} character={pokemon}/>
+          )
+        })
       }
     </div>
   )
@@ -86,11 +90,13 @@ export function App() {
     getPokemons();
   }, []);
 
+  
+
   return (
     <div id="game">
       <NameOfTheGame />
       <ScoreBoard scores={scores} />
-      <MemoryCardContainer/>
+      <MemoryCardContainer pokemons={pokemonsData}/>
     </div>
   )
   
