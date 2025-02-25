@@ -48,18 +48,41 @@ function NameOfTheGame() {
 };
 
 export function App() {
-  const [pokemons, setPokemons] = useState([]);
+  const [pokemonsData, setPokemonsData] = useState([]);
+  
   useEffect(() => {
     async function getPokemons() {
-      try {
-        const data = await fetch("https://pokeapi.co/api/v2/pokemon?limit=12");
-        const parsed = await data.json();
-        console.log(parsed);
-      } catch (err) {
-        console.error(err);
-      };
+      const cached = localStorage.getItem("pokemonsData");
+      
+      if (cached) {
+        setPokemonsData(JSON.parse(cached));
+        // console.log("cached fired");
+        return;
+      } else {
+        try {
+          const response = await fetch("https://pokeapi.co/api/v2/pokemon?limit=12");
+          const data = await response.json();
+          const pokemonList = await Promise.all(
+            data.results.map(async (pokemon) => {
+              const res = await fetch(pokemon.url);
+              const details = await res.json();
+              return {
+                name: pokemon.name,
+                image: details.sprites.front_default,
+              };
+            })
+          )
+          setPokemonsData(pokemonList);
+          localStorage.setItem("pokemonsData", JSON.stringify(pokemonList));
+          // console.log("parsed should have fired");
+          return;
+        } catch (err) {
+          console.error(err);
+        };
 
-    }
+      };
+    };
     getPokemons();
   }, [])
-}
+  
+};
