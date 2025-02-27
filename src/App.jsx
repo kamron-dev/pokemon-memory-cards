@@ -92,13 +92,13 @@ export function App() {
     getPokemons();
   
   }, []);
-  function getBestScore() {
-      const cachedBestScore = JSON.parse(localStorage.getItem("bestScore"));
-      if (cachedBestScore) setScores(oldScores => ({ ...oldScores, bestScore: cachedBestScore }));
-      else localStorage.setItem("bestScore", JSON.stringify(scores.bestScore));
-  };
+  // function getBestScore() {
+  //     const cachedBestScore = JSON.parse(localStorage.getItem("bestScore"));
+  //     if (cachedBestScore) setScores(oldScores => ({ ...oldScores, bestScore: cachedBestScore }));
+  //     else localStorage.setItem("bestScore", JSON.stringify(scores.bestScore));
+  // };
   
-  getBestScore();
+  // getBestScore();
 
   const handleClick = (id) => {
     const pressedPokemon = pokemonsData.find(pokemon => {
@@ -119,7 +119,7 @@ export function App() {
   };
   
   const handleAddScore = () => {
-    setScores(oldScores => ({ ...oldScores, currentScore: oldScores.currentScore + 1 }))
+    setScores(oldScores => ({ ...oldScores, currentScore: oldScores.currentScore + 1, bestScore: oldScores.bestScore + 1 }))
     console.log(scores);
 
   };
