@@ -5,7 +5,7 @@ import './App.css'
 
 function MemoryCard({character}) {
   return (
-    <div>
+    <div className="pokemon-card">
       <img src={character.image} alt={`${character.name}-picture`} />
       <h3>{character.name}</h3>
     </div>
@@ -54,6 +54,7 @@ function NameOfTheGame() {
 export function App() {
   const [pokemonsData, setPokemonsData] = useState([]);
   const scores = { currentScore: 0, bestScore: 0 };
+  const POSSIBLE_POKEMONS = 721;
   
   useEffect(() => {
     async function getPokemons() {

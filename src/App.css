@@ -48,12 +48,24 @@
 
 #card-container {
   grid-area: card-container;
+
   border: 1px solid orange;
-  width: 100%;
+  /* width: 100%; */
+  padding: 15px;
 
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: auto;
+  
+  
+}
+
+.pokemon-card {
+
+  width: 65%;
+  height: 95%;
+  border: 1px solid purple;
+  justify-self: center;
 }
 /* .logo {
   height: 6em;
