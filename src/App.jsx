@@ -61,7 +61,8 @@ const getRandomPokemon = async (id) => {
 
 export function App() {
   const [pokemonsData, setPokemonsData] = useState([]);
-  const scores = { currentScore: 0, bestScore: 0 };
+  // const scores = { currentScore: 0, bestScore: 0 };
+  const [scores, setScores] = useState({currentScore: 0, bestScore: 0})
   const POSSIBLE_POKEMONS = 721;
   
   useEffect(() => {
@@ -89,7 +90,15 @@ export function App() {
       };
     };
     getPokemons();
+  
   }, []);
+  function getBestScore() {
+      const cachedBestScore = JSON.parse(localStorage.getItem("bestScore"));
+      if (cachedBestScore) setScores(oldScores => ({ ...oldScores, bestScore: cachedBestScore }));
+      else localStorage.setItem("bestScore", JSON.stringify(scores.bestScore));
+  };
+  
+  getBestScore();
 
   const handleClick = (id) => {
     const pressedPokemon = pokemonsData.find(pokemon => {
@@ -98,15 +107,22 @@ export function App() {
     if (pressedPokemon.isPressed) {
       //handle endgame
       alert("You lost!");
+      
     } else {
       setPokemonsData(oldArray => {
         return oldArray.map(pokemon => {
           return pokemon.id === pressedPokemon.id ? { ...pressedPokemon, isPressed: !pressedPokemon.isPressed } : pokemon;
         })
       });
-      console.log(pokemonsData);
+      handleAddScore()
     }
-  }
+  };
+  
+  const handleAddScore = () => {
+    setScores(oldScores => ({ ...oldScores, currentScore: oldScores.currentScore + 1 }))
+    console.log(scores);
+
+  };
 
   return (
     <div id="game">
