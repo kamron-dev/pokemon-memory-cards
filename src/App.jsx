@@ -20,7 +20,7 @@ function MemoryCardContainer({pokemons}) {
       {
         pokemons.map((pokemon) => {
           return (
-            <MemoryCard key={pokemon.name} character={pokemon}/>
+            <MemoryCard key={pokemon.id} character={pokemon}/>
           )
         })
       }
@@ -74,29 +74,14 @@ export function App() {
         return;
       } else {
         try {
-          // const response = await fetch("https://pokeapi.co/api/v2/pokemon?limit=12");
-          // const data = await response.json();
-          // const pokemonList = await Promise.all(
-          //   data.results.map(async (pokemon) => {
-          //     const res = await fetch(pokemon.url);
-          //     const details = await res.json();
-          //     return {
-          //       name: pokemon.name,
-          //       image: details.sprites.front_default,
-          //     };
-          //   })
-          // )
-          // setPokemonsData(pokemonList);
-          // localStorage.setItem("pokemonsData", JSON.stringify(pokemonList));
-          // // console.log("parsed should have fired");
-          // return;
-          const pokemonsList = [];
-          for (let i = 0; i < 12; i++) {
+          const promisesArray = Array.from({ length: 12 }, () => {
             const randomNum = Math.floor(Math.random() * POSSIBLE_POKEMONS + 1);
-            pokemonsList.push( await getRandomPokemon(randomNum));
-          }
+            return getRandomPokemon(randomNum);
+          });
+          const pokemonsList = await Promise.all(promisesArray);
           setPokemonsData(pokemonsList);
           localStorage.setItem("pokemonsData", JSON.stringify(pokemonsList));
+  
         } catch (err) {
           console.error(err);
         };
