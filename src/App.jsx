@@ -3,16 +3,16 @@ import { useState, useEffect } from 'react'
 // import viteLogo from '/vite.svg'
 import './App.css'
 
-function MemoryCard({character}) {
+function MemoryCard({character, onClick}) {
   return (
-    <div className="pokemon-card">
+    <div className="pokemon-card" onClick={onClick}>
       <img src={character.image} alt={`${character.name}-picture`} />
       <h3>{character.name}</h3>
     </div>
   );
 };
 
-function MemoryCardContainer({pokemons}) {
+function MemoryCardContainer({pokemons, onClick}) {
   // const someArrayThatHoldsCharacters = [];
 
   return (
@@ -20,7 +20,7 @@ function MemoryCardContainer({pokemons}) {
       {
         pokemons.map((pokemon) => {
           return (
-            <MemoryCard key={pokemon.id} character={pokemon}/>
+            <MemoryCard key={pokemon.id} character={pokemon} onClick={()=> onClick(pokemon.id)}/>
           )
         })
       }
@@ -91,13 +91,28 @@ export function App() {
     getPokemons();
   }, []);
 
-  
+  const handleClick = (id) => {
+    const pressedPokemon = pokemonsData.find(pokemon => {
+      return pokemon.id === id;
+    });
+    if (pressedPokemon.isPressed) {
+      //handle endgame
+      alert("You lost!");
+    } else {
+      setPokemonsData(oldArray => {
+        return oldArray.map(pokemon => {
+          return pokemon.id === pressedPokemon.id ? { ...pressedPokemon, isPressed: !pressedPokemon.isPressed } : pokemon;
+        })
+      });
+      console.log(pokemonsData);
+    }
+  }
 
   return (
     <div id="game">
       <NameOfTheGame />
       <ScoreBoard scores={scores} />
-      <MemoryCardContainer pokemons={pokemonsData}/>
+      <MemoryCardContainer onClick={handleClick} pokemons={pokemonsData}/>
     </div>
   )
   
