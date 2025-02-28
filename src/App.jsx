@@ -91,7 +91,31 @@ export function App() {
     getPokemons();
   
   }, []);
+
   
+  const addPoint = () => {
+
+    setScores(oldScores => {
+      let newCurrentScore = oldScores.currentScore + 1;
+      // let newBestScore = oldScores.bestScore + 1;
+      
+      
+      if (newCurrentScore === 12) {
+        alert("You won!");
+        endGame();
+      };
+      return {...oldScores, currentScore: newCurrentScore };
+      
+    });
+  };
+
+  const endGame = () => {
+    setScores(oldScore => {
+      return scores.currentScore > oldScore.bestScore ? { currentScore: 0, bestScore: scores.currentScore } : { ...oldScore, currentScore: 0 };
+    });
+    // refreshCards(); mark them as never pressed
+    // shuffleCards(); shuffle the order of the cards appearing in the container
+  }
 
   const handleClick = (id) => {
     const pressedPokemon = pokemonsData.find(pokemon => {
@@ -100,32 +124,33 @@ export function App() {
     if (pressedPokemon.isPressed) {
       //handle endgame
       alert("You lost!");
+      endGame();
       
     } else {
       setPokemonsData(oldArray => {
         return oldArray.map(pokemon => {
           return pokemon.id === pressedPokemon.id ? { ...pressedPokemon, isPressed: !pressedPokemon.isPressed } : pokemon;
-        })
+        });
       });
-      handleAddScore();
+      // addPoint();
+      addPoint();
+      // shuffleCards();
+      // check if win();
     }
   };
   
-  const handleAddScore = () => {
-    setScores(oldScores => {
-      let newCurrentScore = oldScores.currentScore + 1;
-      let newBestScore = oldScores.bestScore + 1;
+  // const handleAddScore = () => {
+  //   setScores(oldScores => {
+  //     let newCurrentScore = oldScores.currentScore + 1;
+  //     let newBestScore = oldScores.bestScore + 1;
       
-      // localStorage.setItem("bestScore", newBestScore);
-
-      if (newCurrentScore === 12) alert("You won!");
-      return { currentScore: newCurrentScore, bestScore: newBestScore };
-    });
+      
+  //     if (newCurrentScore === 12) alert("You won!");
+  //     return { currentScore: newCurrentScore, bestScore: newBestScore };
+  //     // return newBestScore > oldScores.bestScore ? { currentScore: newCurrentScore, bestScore: newBestScore } : { ...oldScores, currentScore: newCurrentScore };
+  //   });
     
-
-    console.log(scores);
-
-  };
+  // };
 
 
   return (
