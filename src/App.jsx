@@ -70,7 +70,6 @@ export function App() {
       
       if (cached) {
         setPokemonsData(JSON.parse(cached));
-        // console.log("cached fired");
         return;
       } else {
         try {
