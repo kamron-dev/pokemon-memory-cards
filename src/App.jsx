@@ -119,10 +119,16 @@ export function App() {
   };
   
   const handleAddScore = () => {
-    setScores(oldScores => ({ ...oldScores, currentScore: oldScores.currentScore + 1, bestScore: oldScores.bestScore + 1 }))
-    console.log(scores);
+    setScores(oldScores => {
+      let newCurrentScore = oldScores.currentScore + 1;
+      let newBestScore = oldScores.bestScore + 1;
+
+      if (newCurrentScore === 12) alert("You won!");
+      return { currentScore: newCurrentScore, bestScore: newBestScore };
+    });
 
   };
+
 
   return (
     <div id="game">
