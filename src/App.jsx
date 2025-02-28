@@ -102,20 +102,36 @@ export function App() {
       
       if (newCurrentScore === 12) {
         alert("You won!");
-        endGame();
+        endGame(); 
       };
       return {...oldScores, currentScore: newCurrentScore };
       
     });
   };
+  function shuffleCards(cards) {
+      const copy = [...cards];
+      for (let i = copy.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [copy[i], copy[j]] = [copy[j], copy[i]];
+      }
+      return copy;
+    };
 
   const endGame = () => {
     setScores(oldScore => {
       return scores.currentScore > oldScore.bestScore ? { currentScore: 0, bestScore: scores.currentScore } : { ...oldScore, currentScore: 0 };
     });
     // refreshCards(); mark them as never pressed
+    (function refreshCards() {
+      setPokemonsData(oldData => {
+        return oldData.map(oldPokemon => {
+          return ({ ...oldPokemon, isPressed: false });
+        });
+      });
+    })();
     // shuffleCards(); shuffle the order of the cards appearing in the container
-  }
+    setPokemonsData(oldArray => shuffleCards(oldArray));
+  };
 
   const handleClick = (id) => {
     const pressedPokemon = pokemonsData.find(pokemon => {
@@ -136,7 +152,8 @@ export function App() {
       addPoint();
       // check if win();
       // shuffleCards();
-    }
+      setPokemonsData(oldArray => shuffleCards(oldArray));
+    };
   };
   
   // const handleAddScore = () => {
