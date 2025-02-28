@@ -132,10 +132,10 @@ export function App() {
           return pokemon.id === pressedPokemon.id ? { ...pressedPokemon, isPressed: !pressedPokemon.isPressed } : pokemon;
         });
       });
-      // addPoint();
+      
       addPoint();
-      // shuffleCards();
       // check if win();
+      // shuffleCards();
     }
   };
   
