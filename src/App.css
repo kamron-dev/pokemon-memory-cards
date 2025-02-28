@@ -70,7 +70,7 @@
   justify-self: center;
   cursor: pointer;
   box-shadow: 0 0 5px rgb(214, 220, 139);
-  transition: box-shadow 0.5s ease;
+  transition: box-shadow 0.5s ease, transform 120ms ease-in;
 }
 
 .pokemon-card>img {
@@ -80,6 +80,7 @@
 
 .pokemon-card:hover {
   box-shadow: 0 0 20px rgb(190, 191, 70);
+  transform: scale(105%);
 }
 /* .logo {
   height: 6em;

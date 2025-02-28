@@ -61,7 +61,6 @@ const getRandomPokemon = async (id) => {
 
 export function App() {
   const [pokemonsData, setPokemonsData] = useState([]);
-  // const scores = { currentScore: 0, bestScore: 0 };
   const [scores, setScores] = useState({currentScore: 0, bestScore: 0})
   const POSSIBLE_POKEMONS = 721;
   
@@ -92,13 +91,7 @@ export function App() {
     getPokemons();
   
   }, []);
-  // function getBestScore() {
-  //     const cachedBestScore = JSON.parse(localStorage.getItem("bestScore"));
-  //     if (cachedBestScore) setScores(oldScores => ({ ...oldScores, bestScore: cachedBestScore }));
-  //     else localStorage.setItem("bestScore", JSON.stringify(scores.bestScore));
-  // };
   
-  // getBestScore();
 
   const handleClick = (id) => {
     const pressedPokemon = pokemonsData.find(pokemon => {
@@ -114,7 +107,7 @@ export function App() {
           return pokemon.id === pressedPokemon.id ? { ...pressedPokemon, isPressed: !pressedPokemon.isPressed } : pokemon;
         })
       });
-      handleAddScore()
+      handleAddScore();
     }
   };
   
@@ -122,10 +115,15 @@ export function App() {
     setScores(oldScores => {
       let newCurrentScore = oldScores.currentScore + 1;
       let newBestScore = oldScores.bestScore + 1;
+      
+      // localStorage.setItem("bestScore", newBestScore);
 
       if (newCurrentScore === 12) alert("You won!");
       return { currentScore: newCurrentScore, bestScore: newBestScore };
     });
+    
+
+    console.log(scores);
 
   };
 
