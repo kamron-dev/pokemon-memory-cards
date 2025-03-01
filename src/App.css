@@ -9,6 +9,8 @@
   height: auto;
 
   box-sizing: border-box;
+
+  background-color: rgb(48, 53, 63);
 }
 
 #game {
@@ -22,6 +24,8 @@
   grid-template-areas:
       "header scoreboard"
       "card-container card-container";
+
+
 }
 
 #header {
@@ -35,13 +39,14 @@
 
 #header > * {
   margin: 15px;
+  color: white;
 }
 
 #scoreboard {
   grid-area: scoreboard;
   border: 1px solid blue;
   height: 100%;
-
+  color: white;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -66,7 +71,8 @@
   border-radius: 15px;
   width: 75%;
   height: 95%;
-  border: 1px solid purple;
+  /* border: 1px solid purple; */
+  background-color: rgb(197, 193, 189);
   justify-self: center;
   cursor: pointer;
   box-shadow: 0 0 5px rgb(214, 220, 139);
@@ -76,10 +82,11 @@
 .pokemon-card>img {
   height: 10rem;
   width: 10rem;
+  
 }
 
 .pokemon-card:hover {
-  box-shadow: 0 0 20px rgb(190, 191, 70);
+  box-shadow: 0 5px 25px rgb(190, 191, 70);
   transform: scale(105%);
 }
 /* .logo {
