@@ -75,8 +75,9 @@
   background-color: rgb(197, 193, 189);
   justify-self: center;
   cursor: pointer;
-  box-shadow: 0 0 5px rgb(214, 220, 139);
+  /* box-shadow: 0 0 5px rgb(214, 220, 139); */
   transition: box-shadow 0.5s ease, transform 120ms ease-in;
+
 }
 
 .pokemon-card>img {
