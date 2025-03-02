@@ -1,6 +1,4 @@
 import { useState, useEffect } from 'react'
-// import reactLogo from './assets/react.svg'
-// import viteLogo from '/vite.svg'
 import './App.css'
 
 function MemoryCard({character, onClick}) {
@@ -155,18 +153,6 @@ export function App() {
     };
   };
   
-  // const handleAddScore = () => {
-  //   setScores(oldScores => {
-  //     let newCurrentScore = oldScores.currentScore + 1;
-  //     let newBestScore = oldScores.bestScore + 1;
-      
-      
-  //     if (newCurrentScore === 12) alert("You won!");
-  //     return { currentScore: newCurrentScore, bestScore: newBestScore };
-  //     // return newBestScore > oldScores.bestScore ? { currentScore: newCurrentScore, bestScore: newBestScore } : { ...oldScores, currentScore: newCurrentScore };
-  //   });
-    
-  // };
 
 
   return (
