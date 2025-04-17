@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import './App.css'
+import PropTypes from 'prop-types';
 
 function MemoryCard({character, onClick}) {
   return (
@@ -164,3 +165,17 @@ export function App() {
   )
   
 };
+
+MemoryCard.propTypes = {
+  character: PropTypes.string,
+  onClick: PropTypes.func,
+};
+
+MemoryCardContainer.propTypes = {
+  pokemons: PropTypes.array,
+  onClick: PropTypes.func
+};
+
+ScoreBoard.propTypes = {
+  scores: PropTypes.string
+}
