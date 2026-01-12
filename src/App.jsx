@@ -50,12 +50,12 @@ function NameOfTheGame() {
   )
 };
 
-const getRandomPokemon = async (id) => {
-  const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`);
-  const { name, sprites } = await res.json();
-  const image = sprites.front_default;
-  return { id, name, image, isPressed: false }
-};
+// const getRandomPokemon = async (id) => {
+//   const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`);
+//   const { name, sprites } = await res.json();
+//   const image = sprites.front_default;
+//   return { id, name, image, isPressed: false }
+// };
 
 
 export function App() {
