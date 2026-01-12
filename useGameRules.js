@@ -1,9 +1,10 @@
-import { useState, useEffect, useReducer } from "react";
+import { useEffect, useReducer } from "react";
 
-function scoreDispatcher(state, action) {
+function gameDispatcher(state, action) {
     switch (action.type) {
-        case "add-score": 
-            //finish this
+        case "save-pokemons":
+            return { ...state, pokemons: action.data };
+        
     }
 }
 
@@ -16,15 +17,23 @@ const getRandomPokemon = async (id) => {
 
 function useGameRules() {
     const POSSIBLE_POKEMONS = 721;
-    const [pokemons, setPokemons] = useState([]);
-    const [scores, dispatch] = useReducer(scoreDispatcher, { currentScore: 0, bestScore: 0 })
+    const [gameState, dispatch] = useReducer(gameDispatcher, {
+        pokemons: [],
+        currentScore: 0,
+        bestScore: 0,
+        // status IMPLEMENT LATER
+    });
 
     useEffect(() => {
         async function getPokemons() {
           const cached = localStorage.getItem("pokemonsData");
           
           if (cached) {
-            setPokemons(JSON.parse(cached));
+              // setPokemons(JSON.parse(cached));
+              dispatch({
+                  type: "save-pokemons",
+                  data: JSON.parse(cached)
+              })
             return;
           } else {
             try {
@@ -33,7 +42,11 @@ function useGameRules() {
                 return getRandomPokemon(randomNum);
               });
               const pokemonsList = await Promise.all(promisesArray);
-              setPokemons(pokemonsList);
+                //   setPokemons(pokemonsList);
+                dispatch({
+                    type: "save-pokemons",
+                    data: pokemonsList
+                })
               localStorage.setItem("pokemonsData", JSON.stringify(pokemonsList));
       
             } catch (err) {
@@ -48,8 +61,7 @@ function useGameRules() {
 
 
     return {
-        pokemons,
-        score,
+        gameState,
         onCardClick
     }
 };
