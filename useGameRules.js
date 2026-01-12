@@ -2,6 +2,7 @@ import { useEffect, useReducer } from "react";
 
 function gameDispatcher(state, action) {
     switch (action.type) {
+        // save pokemons either from localStorage or fetch
         case "save-pokemons":
             return { ...state, pokemons: action.data };
         
