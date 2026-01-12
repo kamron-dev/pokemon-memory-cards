@@ -1,4 +1,3 @@
-import { useState, useEffect } from 'react'
 import './App.css'
 import PropTypes from 'prop-types';
 import useGameRules from '../useGameRules';
@@ -60,36 +59,8 @@ function NameOfTheGame() {
 
 
 export function App() {
-  const [pokemonsData, setPokemonsData] = useState([]);
-  const [scores, setScores] = useState({currentScore: 0, bestScore: 0})
-  const POSSIBLE_POKEMONS = 721;
+  const { gameState, onCardClick } = useGameRules();
   
-  useEffect(() => {
-    async function getPokemons() {
-      const cached = localStorage.getItem("pokemonsData");
-      
-      if (cached) {
-        setPokemonsData(JSON.parse(cached));
-        return;
-      } else {
-        try {
-          const promisesArray = Array.from({ length: 12 }, () => {
-            const randomNum = Math.floor(Math.random() * POSSIBLE_POKEMONS + 1);
-            return getRandomPokemon(randomNum);
-          });
-          const pokemonsList = await Promise.all(promisesArray);
-          setPokemonsData(pokemonsList);
-          localStorage.setItem("pokemonsData", JSON.stringify(pokemonsList));
-  
-        } catch (err) {
-          console.error(err);
-        };
-
-      };
-    };
-    getPokemons();
-  
-  }, []);
 
   
   const addPoint = () => {

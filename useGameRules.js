@@ -27,16 +27,11 @@ function useGameRules() {
         currentScore: 0,
         bestScore: 0,
         // status IMPLEMENT LATER
-    }, function () {
-        const cached = localStorage.getItem("pokemonsData");
-        if (cached) dispatch({
-            type: "save-pokemons",
-            data: JSON.parse(cached)
-        })
     });
 
     useEffect(() => {
         async function getPokemons() {
+            
             try {
               const promisesArray = Array.from({ length: 12 }, () => {
                 const randomNum = Math.floor(Math.random() * POSSIBLE_POKEMONS + 1);
@@ -60,10 +55,11 @@ function useGameRules() {
       
       }, []);
 
-
+    console.log(gameState)
+    
     return {
         gameState,
-        onCardClick
+        // onCardClick
     }
 };
 
