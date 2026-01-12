@@ -5,6 +5,10 @@ function gameDispatcher(state, action) {
         case "save-pokemons":
             return { ...state, pokemons: action.data };
         
+        
+        
+        default:
+            return state;
     }
 }
 
