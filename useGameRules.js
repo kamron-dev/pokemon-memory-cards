@@ -31,23 +31,31 @@ function useGameRules() {
 
     useEffect(() => {
         async function getPokemons() {
-            
-            try {
-              const promisesArray = Array.from({ length: 12 }, () => {
-                const randomNum = Math.floor(Math.random() * POSSIBLE_POKEMONS + 1);
-                return getRandomPokemon(randomNum);
-              });
-              const pokemonsList = await Promise.all(promisesArray);
-                //   setPokemons(pokemonsList);
+            const cached = localStorage.getItem("pokemonsData");
+            if (cached) {
                 dispatch({
                     type: "save-pokemons",
-                    data: pokemonsList
+                    data: JSON.parse(cached)
                 })
-              localStorage.setItem("pokemonsData", JSON.stringify(pokemonsList));
-      
-            } catch (err) {
-              console.error(err);
-            };
+            } else {
+                try {
+                  const promisesArray = Array.from({ length: 12 }, () => {
+                    const randomNum = Math.floor(Math.random() * POSSIBLE_POKEMONS + 1);
+                    return getRandomPokemon(randomNum);
+                  });
+                  const pokemonsList = await Promise.all(promisesArray);
+                    //   setPokemons(pokemonsList);
+                    dispatch({
+                        type: "save-pokemons",
+                        data: pokemonsList
+                    })
+                  localStorage.setItem("pokemonsData", JSON.stringify(pokemonsList));
+          
+                } catch (err) {
+                  console.error(err);
+                };
+
+            }
     
           
         };
@@ -55,7 +63,7 @@ function useGameRules() {
       
       }, []);
 
-    console.log(gameState)
+    
     
     return {
         gameState,

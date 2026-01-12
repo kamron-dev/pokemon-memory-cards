@@ -1,7 +1,7 @@
 import './App.css'
 import PropTypes from 'prop-types';
 import useGameRules from '../useGameRules';
-
+import { useEffect } from 'react';
 function MemoryCard({character, onClick}) {
   return (
     <div className="pokemon-card" onClick={onClick}>
@@ -61,7 +61,9 @@ function NameOfTheGame() {
 export function App() {
   const { gameState, onCardClick } = useGameRules();
   
-
+  // useEffect(() => {
+  //   console.log("Updated gameState: ", gameState);
+  // }, [gameState])
   
   const addPoint = () => {
 
