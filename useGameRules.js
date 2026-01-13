@@ -25,7 +25,7 @@ function useGameRules() {
     const [gameState, dispatch] = useReducer(gameDispatcher, {
         pokemons: [],
         currentScore: 0,
-        bestScore: 0,
+        highScore: 0,
         // status IMPLEMENT LATER
     });
 

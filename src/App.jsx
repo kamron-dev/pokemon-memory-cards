@@ -27,14 +27,14 @@ function MemoryCardContainer({pokemons, onClick}) {
   )
 };
 
-function ScoreBoard({scores}) {
+function ScoreBoard({currentScore, highScore}) {
   return (
     <div id="scoreboard">
       <h3>
-        Score: {scores.currentScore}
+        Score: {currentScore}
       </h3>
       <h3>
-        Best Score: {scores.bestScore}
+        Best Score: {highScore}
       </h3>
     </div>
   );
@@ -61,9 +61,9 @@ function NameOfTheGame() {
 export function App() {
   const { gameState, onCardClick } = useGameRules();
   
-  // useEffect(() => {
-  //   console.log("Updated gameState: ", gameState);
-  // }, [gameState])
+  useEffect(() => {
+    console.log("Updated gameState: ", gameState);
+  }, [gameState])
   
   const addPoint = () => {
 
@@ -133,8 +133,8 @@ export function App() {
   return (
     <div id="game">
       <NameOfTheGame />
-      <ScoreBoard scores={scores} />
-      <MemoryCardContainer onClick={handleClick} pokemons={pokemonsData}/>
+      <ScoreBoard currentScore={gameState.currentScore} highScore={gameState.highScore}/>
+      <MemoryCardContainer onClick={handleClick} pokemons={gameState.pokemons}/>
     </div>
   )
   
