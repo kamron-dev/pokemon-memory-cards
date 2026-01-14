@@ -18,7 +18,8 @@ function gameDispatcher(state, action) {
                         return {
                             ...state, pokemons: state.pokemons.map(pokemon => {
                                 return pokemon.id === pressedPokemon.id ? { ...pokemon, isPressed: !pokemon.isPressed } : pokemon;
-                            })
+                            }),
+                            currentScore: state.currentScore + 1,
                         };
                     };
                     
