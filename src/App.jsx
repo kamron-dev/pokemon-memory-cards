@@ -1,7 +1,8 @@
 import './App.css'
 import PropTypes from 'prop-types';
 import useGameRules from '../useGameRules';
-import { useEffect } from 'react';
+// import { useEffect } from 'react';
+
 function MemoryCard({character, onClick}) {
   return (
     <div className="pokemon-card" onClick={onClick}>
@@ -59,11 +60,11 @@ function NameOfTheGame() {
 
 
 export function App() {
-  const { gameState, onCardClick } = useGameRules();
+  const { gameState, handleCardClick } = useGameRules();
   
-  useEffect(() => {
-    console.log("Updated gameState: ", gameState);
-  }, [gameState])
+  // useEffect(() => {
+  //   console.log("Updated gameState: ", gameState);
+  // }, [gameState])
   
   const addPoint = () => {
 
@@ -105,28 +106,28 @@ export function App() {
     setPokemonsData(oldArray => shuffleCards(oldArray));
   };
 
-  const handleClick = (id) => {
-    const pressedPokemon = pokemonsData.find(pokemon => {
-      return pokemon.id === id;
-    });
-    if (pressedPokemon.isPressed) {
-      //handle endgame
-      alert("You lost!");
-      endGame();
+  // const handleClick = (id) => {
+  //   const pressedPokemon = pokemonsData.find(pokemon => {
+  //     return pokemon.id === id;
+  //   });
+  //   if (pressedPokemon.isPressed) {
+  //     //handle endgame
+  //     alert("You lost!");
+  //     endGame();
       
-    } else {
-      setPokemonsData(oldArray => {
-        return oldArray.map(pokemon => {
-          return pokemon.id === pressedPokemon.id ? { ...pressedPokemon, isPressed: !pressedPokemon.isPressed } : pokemon;
-        });
-      });
+  //   } else {
+  //     setPokemonsData(oldArray => {
+  //       return oldArray.map(pokemon => {
+  //         return pokemon.id === pressedPokemon.id ? { ...pressedPokemon, isPressed: !pressedPokemon.isPressed } : pokemon;
+  //       });
+  //     });
       
-      addPoint();
-      // check if win();
-      // shuffleCards();
-      setPokemonsData(oldArray => shuffleCards(oldArray));
-    };
-  };
+  //     addPoint();
+  //     // check if win();
+  //     // shuffleCards();
+  //     setPokemonsData(oldArray => shuffleCards(oldArray));
+  //   };
+  // };
   
 
 
@@ -134,7 +135,7 @@ export function App() {
     <div id="game">
       <NameOfTheGame />
       <ScoreBoard currentScore={gameState.currentScore} highScore={gameState.highScore}/>
-      <MemoryCardContainer onClick={handleClick} pokemons={gameState.pokemons}/>
+      <MemoryCardContainer onClick={handleCardClick} pokemons={gameState.pokemons}/>
     </div>
   )
   

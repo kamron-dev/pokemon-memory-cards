@@ -6,7 +6,30 @@ function gameDispatcher(state, action) {
         case "save-pokemons":
             return { ...state, pokemons: action.data };
         
-        
+        case "card-clicked":
+            // alert("I worked!" + action.pressedId);
+            { 
+                function handleCardClick(pressedId) {
+                    const pressedPokemon = state.pokemons.find(pokemon => pokemon.id === pressedId);
+                    alert(pressedPokemon)
+                    if (pressedPokemon.isPressed) {
+                        alert("You Lost!!!")
+                    } else {
+                        return {
+                            ...state, pokemons: state.pokemons.map(pokemon => {
+                                return pokemon.id === pressedPokemon.id ? { ...pokemon, isPressed: !pokemon.isPressed } : pokemon;
+                            })
+                        };
+                    };
+                    
+                };
+                handleCardClick(action.pressedId);
+                // alert("I worked!");
+                
+                break;
+             }
+           
+            
         
         default:
             return state;
@@ -63,11 +86,16 @@ function useGameRules() {
       
       }, []);
 
-    
+    function handleCardClick(id) {
+        dispatch({
+            type: "card-clicked",
+            pressedId: id
+        })
+    }
     
     return {
         gameState,
-        // onCardClick
+        handleCardClick
     }
 };
 
