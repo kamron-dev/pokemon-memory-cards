@@ -24,7 +24,6 @@ function gameDispatcher(state, action) {
                     
                 };
                 handleCardClick(action.pressedId);
-                // alert("I worked!");
                 
                 break;
              }
@@ -90,7 +89,8 @@ function useGameRules() {
         dispatch({
             type: "card-clicked",
             pressedId: id
-        })
+        });
+        
     }
     
     return {
