@@ -48,7 +48,7 @@ function useGameRules() {
         pokemons: [],
         currentScore: 0,
         highScore: 0,
-        // status IMPLEMENT LATER
+        status: "playing"
     });
 
     useEffect(() => {
