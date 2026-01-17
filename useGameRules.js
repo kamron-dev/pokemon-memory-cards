@@ -16,13 +16,14 @@ function gameDispatcher(state, action) {
                         status: "lost"
                     }
                 } else {
+                    const nextScore = state.currentScore + 1;
                     return {
                         ...state,
                         pokemons: state.pokemons.map(pokemon => {
                             return pokemon.id === pressedPokemon.id ? { ...pokemon, isPressed: !pokemon.isPressed } : pokemon;
                         }),
-                        currentScore: state.currentScore + 1,
-                        highScore: Math.max(state.currentScore, state.highScore)
+                        currentScore: nextScore,
+                        highScore: Math.max(nextScore, state.highScore)
                     }
                 }
 
