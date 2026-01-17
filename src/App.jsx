@@ -135,8 +135,9 @@ export function App() {
   return (
     <div id="game">
       <NameOfTheGame />
-      <ScoreBoard current={gameState.currentScore} top={gameState.highScore}/>
-      <MemoryCardContainer onClick={handleCardClick} pokemons={gameState.pokemons}/>
+      <ScoreBoard current={gameState.currentScore} top={gameState.highScore} />
+      {gameState.status === "playing" && <MemoryCardContainer onClick={handleCardClick} pokemons={gameState.pokemons}/>}
+      
     </div>
   )
   
