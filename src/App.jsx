@@ -28,14 +28,14 @@ function MemoryCardContainer({pokemons, onClick}) {
   )
 };
 
-function ScoreBoard({currentScore, highScore}) {
+function ScoreBoard({current, top}) {
   return (
     <div id="scoreboard">
       <h3>
-        Score: {currentScore}
+        Score: {current}
       </h3>
       <h3>
-        Best Score: {highScore}
+        Best Score: {top}
       </h3>
     </div>
   );
@@ -45,7 +45,7 @@ function NameOfTheGame() {
   return (
     <div id="header">
       <h1>Memory Game</h1>
-      <h3>Get points by clicking on an image. Do not click on an image twice!</h3>
+      <h3>Get points by clicking on images. Do not click on an image twice!</h3>
         
     </div>
   )
@@ -61,50 +61,51 @@ function NameOfTheGame() {
 
 export function App() {
   const { gameState, handleCardClick } = useGameRules();
+  console.log(gameState)
   
   // useEffect(() => {
   //   console.log("Updated gameState: ", gameState);
   // }, [gameState])
   
-  const addPoint = () => {
+  // const addPoint = () => {
 
-    setScores(oldScores => {
-      let newCurrentScore = oldScores.currentScore + 1;
-      // let newBestScore = oldScores.bestScore + 1;
+  //   setScores(oldScores => {
+  //     let newCurrentScore = oldScores.currentScore + 1;
+  //     // let newBestScore = oldScores.bestScore + 1;
       
       
-      if (newCurrentScore === 12) {
-        alert("You won!");
-        endGame(); 
-      };
-      return {...oldScores, currentScore: newCurrentScore };
+  //     if (newCurrentScore === 12) {
+  //       alert("You won!");
+  //       endGame(); 
+  //     };
+  //     return {...oldScores, currentScore: newCurrentScore };
       
-    });
-  };
-  function shuffleCards(cards) {
-      const copy = [...cards];
-      for (let i = copy.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [copy[i], copy[j]] = [copy[j], copy[i]];
-      }
-      return copy;
-    };
+  //   });
+  // };
+  // function shuffleCards(cards) {
+  //     const copy = [...cards];
+  //     for (let i = copy.length - 1; i > 0; i--) {
+  //       const j = Math.floor(Math.random() * (i + 1));
+  //       [copy[i], copy[j]] = [copy[j], copy[i]];
+  //     }
+  //     return copy;
+  //   };
 
-  const endGame = () => {
-    setScores(oldScore => {
-      return scores.currentScore > oldScore.bestScore ? { currentScore: 0, bestScore: scores.currentScore } : { ...oldScore, currentScore: 0 };
-    });
-    // refreshCards(); mark them as never pressed
-    (function refreshCards() {
-      setPokemonsData(oldData => {
-        return oldData.map(oldPokemon => {
-          return ({ ...oldPokemon, isPressed: false });
-        });
-      });
-    })();
-    // shuffleCards(); shuffle the order of the cards appearing in the container
-    setPokemonsData(oldArray => shuffleCards(oldArray));
-  };
+  // const endGame = () => {
+  //   setScores(oldScore => {
+  //     return scores.currentScore > oldScore.bestScore ? { currentScore: 0, bestScore: scores.currentScore } : { ...oldScore, currentScore: 0 };
+  //   });
+  //   // refreshCards(); mark them as never pressed
+  //   (function refreshCards() {
+  //     setPokemonsData(oldData => {
+  //       return oldData.map(oldPokemon => {
+  //         return ({ ...oldPokemon, isPressed: false });
+  //       });
+  //     });
+  //   })();
+  //   // shuffleCards(); shuffle the order of the cards appearing in the container
+  //   setPokemonsData(oldArray => shuffleCards(oldArray));
+  // };
 
   // const handleClick = (id) => {
   //   const pressedPokemon = pokemonsData.find(pokemon => {
@@ -134,23 +135,23 @@ export function App() {
   return (
     <div id="game">
       <NameOfTheGame />
-      <ScoreBoard currentScore={gameState.currentScore} highScore={gameState.highScore}/>
+      <ScoreBoard current={gameState.currentScore} top={gameState.highScore}/>
       <MemoryCardContainer onClick={handleCardClick} pokemons={gameState.pokemons}/>
     </div>
   )
   
 };
 
-MemoryCard.propTypes = {
-  character: PropTypes.string,
-  onClick: PropTypes.func,
-};
+// MemoryCard.propTypes = {
+//   character: PropTypes.string,
+//   onClick: PropTypes.func,
+// };
 
-MemoryCardContainer.propTypes = {
-  pokemons: PropTypes.array,
-  onClick: PropTypes.func
-};
+// MemoryCardContainer.propTypes = {
+//   pokemons: PropTypes.array,
+//   onClick: PropTypes.func
+// };
 
-ScoreBoard.propTypes = {
-  scores: PropTypes.string
-}
+// ScoreBoard.propTypes = {
+//   scores: PropTypes.string
+// }

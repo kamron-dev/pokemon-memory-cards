@@ -7,27 +7,26 @@ function gameDispatcher(state, action) {
             return { ...state, pokemons: action.data };
         
         case "card-clicked":
-            // alert("I worked!" + action.pressedId);
-            { 
-                function handleCardClick(pressedId) {
-                    const pressedPokemon = state.pokemons.find(pokemon => pokemon.id === pressedId);
-                    alert(pressedPokemon)
-                    if (pressedPokemon.isPressed) {
-                        alert("You Lost!!!")
-                    } else {
-                        return {
-                            ...state, pokemons: state.pokemons.map(pokemon => {
-                                return pokemon.id === pressedPokemon.id ? { ...pokemon, isPressed: !pokemon.isPressed } : pokemon;
-                            }),
-                            currentScore: state.currentScore + 1,
-                        };
-                    };
-                    
-                };
-                handleCardClick(action.pressedId);
-                
-                break;
-             }
+            {
+                const pressedPokemon = state.pokemons.find(pokemon => pokemon.id === action.pressedId);
+    
+                if (pressedPokemon.isPressed) {
+                    return {
+                        ...state,
+                        status: "lost"
+                    }
+                } else {
+                    return {
+                        ...state,
+                        pokemons: state.pokemons.map(pokemon => {
+                            return pokemon.id === pressedPokemon.id ? { ...pokemon, isPressed: !pokemon.isPressed } : pokemon;
+                        }),
+                        currentScore: state.currentScore + 1,
+                        highScore: Math.max(state.currentScore, state.highScore)
+                    }
+                }
+
+            }
            
             
         
