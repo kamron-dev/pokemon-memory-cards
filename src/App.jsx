@@ -63,9 +63,7 @@ export function App() {
   const { gameState, handleCardClick } = useGameRules();
   console.log(gameState)
   
-  // useEffect(() => {
-  //   console.log("Updated gameState: ", gameState);
-  // }, [gameState])
+  
   
   // const addPoint = () => {
 
@@ -136,8 +134,9 @@ export function App() {
     <div id="game">
       <NameOfTheGame />
       <ScoreBoard current={gameState.currentScore} top={gameState.highScore} />
+      {gameState.status === "won" && <h1 class="endGame">You won!</h1>}
       {gameState.status === "playing" && <MemoryCardContainer onClick={handleCardClick} pokemons={gameState.pokemons}/>}
-      
+      {gameState.status === "lost" && <h1 class="endGame">You lost...</h1>}
     </div>
   )
   
