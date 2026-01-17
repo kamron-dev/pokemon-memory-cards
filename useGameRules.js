@@ -5,7 +5,7 @@ function gameDispatcher(state, action) {
         // save pokemons either from localStorage or fetch
         case "save-pokemons":
             return { ...state, pokemons: action.data };
-        
+        // when a card is pressed
         case "card-clicked":
             {
                 const pressedPokemon = state.pokemons.find(pokemon => pokemon.id === action.pressedId);
@@ -17,13 +17,23 @@ function gameDispatcher(state, action) {
                     }
                 } else {
                     const nextScore = state.currentScore + 1;
-                    return {
-                        ...state,
-                        pokemons: state.pokemons.map(pokemon => {
-                            return pokemon.id === pressedPokemon.id ? { ...pokemon, isPressed: !pokemon.isPressed } : pokemon;
-                        }),
-                        currentScore: nextScore,
-                        highScore: Math.max(nextScore, state.highScore)
+                    if (nextScore === 12) {
+                        return {
+                            ...state,
+                            currentScore: 12,
+                            highScore: 12,
+                            status: "won"
+                        }
+                    } else {
+                        return {
+                            ...state,
+                            pokemons: state.pokemons.map(pokemon => {
+                                return pokemon.id === pressedPokemon.id ? { ...pokemon, isPressed: !pokemon.isPressed } : pokemon;
+                            }),
+                            currentScore: nextScore,
+                            highScore: Math.max(nextScore, state.highScore)
+                        };
+
                     }
                 }
 
