@@ -13,7 +13,6 @@ function MemoryCard({character, onClick}) {
 };
 
 function MemoryCardContainer({pokemons, onClick}) {
-  // const someArrayThatHoldsCharacters = [];
 
   return (
     <div id="card-container">
@@ -68,16 +67,16 @@ export function App() {
   
 };
 
-// MemoryCard.propTypes = {
-//   character: PropTypes.string,
-//   onClick: PropTypes.func,
-// };
+MemoryCard.propTypes = {
+  character: PropTypes.string,
+  onClick: PropTypes.func,
+};
 
-// MemoryCardContainer.propTypes = {
-//   pokemons: PropTypes.array,
-//   onClick: PropTypes.func
-// };
+MemoryCardContainer.propTypes = {
+  pokemons: PropTypes.array,
+  onClick: PropTypes.func
+};
 
-// ScoreBoard.propTypes = {
-//   scores: PropTypes.string
-// }
+ScoreBoard.propTypes = {
+  scores: PropTypes.string
+}
