@@ -23,7 +23,7 @@ function gameDispatcher(state, action) {
         case "game-goes-on":
             return {
                 ...state,
-                pokemons: state.pokemons.map(pokemon => {
+                pokemons: action.pokemonsArray.map(pokemon => {
                     return pokemon.id === action.pressedPokemonId ? { ...pokemon, isPressed: !pokemon.isPressed } : pokemon;
                 }),
                 currentScore: action.score,
@@ -68,7 +68,7 @@ function useGameRules() {
                 dispatch({
                     type: "save-pokemons",
                     data: JSON.parse(cached)
-                })
+                });
             } else {
                 try {
                   const promisesArray = Array.from({ length: 12 }, () => {
@@ -112,10 +112,12 @@ function useGameRules() {
                 });
             } else {
                 // toggle pressed pockemon status in gameState, set currentScore and highScore, shuffle cards
+                const shuffledPokemons = handleCardShuffle(gameState.pokemons);
                 dispatch({
                     type: "game-goes-on",
                     pressedPokemonId: id,
-                    score: nextScore
+                    score: nextScore,
+                    pokemonsArray: shuffledPokemons
                 });
             };
         };
