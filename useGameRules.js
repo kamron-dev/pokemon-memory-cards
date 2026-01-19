@@ -6,44 +6,76 @@ function gameDispatcher(state, action) {
         case "save-pokemons":
             return { ...state, pokemons: action.data };
         // when a card is pressed
-        case "card-clicked":
-            {
-                const pressedPokemon = state.pokemons.find(pokemon => pokemon.id === action.pressedId);
+        // case "card-clicked":
+        //     {
+        //         const pressedPokemon = state.pokemons.find(pokemon => pokemon.id === action.pressedId);
     
-                if (pressedPokemon.isPressed) {
-                    return {
-                        ...state,
-                        status: "lost"
-                    }
-                } else {
-                    const nextScore = state.currentScore + 1;
-                    if (nextScore === 12) {
-                        return {
-                            ...state,
-                            currentScore: 12,
-                            highScore: 12,
-                            status: "won"
-                        }
-                    } else {
-                        return {
-                            ...state,
-                            pokemons: state.pokemons.map(pokemon => {
-                                return pokemon.id === pressedPokemon.id ? { ...pokemon, isPressed: !pokemon.isPressed } : pokemon;
-                            }),
-                            currentScore: nextScore,
-                            highScore: Math.max(nextScore, state.highScore)
-                        };
+        //         if (pressedPokemon.isPressed) {
+        //             // return lost state, lost screen with a restart button
+        //             return {
+        //                 ...state,
+        //                 status: "lost"
+        //             }
+        //         } else {
+        //             const nextScore = state.currentScore + 1;
+        //             if (nextScore === 12) {
+        //                 // return won state, won screen and restart button
+        //                 return {
+        //                     ...state,
+        //                     currentScore: 12,
+        //                     highScore: 12,
+        //                     status: "won"
+        //                 }
+        //             } else {
+        //                 return {
+        //                     ...state,
+        //                     pokemons: state.pokemons.map(pokemon => {
+        //                         return pokemon.id === pressedPokemon.id ? { ...pokemon, isPressed: !pokemon.isPressed } : pokemon;
+        //                     }),
+        //                     currentScore: nextScore,
+        //                     highScore: Math.max(nextScore, state.highScore)
+        //                 };
 
-                    }
-                }
+        //             }
+        //         }
 
+        //     }
+        case "lost-game":
+            return {
+                ...state,
+                status: "lost"
             }
-           
+        
+        case "won-game":
+            return {
+                ...state,
+                currentScore: 12,
+                highScore: 12,
+                status: "won"
+            }
+        case "game-goes-on":
+            return {
+                ...state, 
+                pokemons: state.pokemons.map(pokemon => {
+                    return pokemon.id === action.pressedPokemonId ? { ...pokemon, isPressed: !pokemon.isPressed } : pokemon;
+                }),
+                currentScore: action.score,
+                highScore: Math.max(state.highScore, action.score)
+            }
             
         
         default:
             return state;
     }
+};
+
+function handleCardShuffle(cards) {
+    const copy = [...cards];
+    for (let i = copy.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [copy[i], copy[j]] = [copy[j], copy[i]];
+    }
+    return copy;
 }
 
 const getRandomPokemon = async (id) => {
@@ -97,21 +129,38 @@ function useGameRules() {
       }, []);
 
     function handleCardClick(id) {
-        dispatch({
-            type: "card-clicked",
-            pressedId: id
-        });
+        const pressedPokemon = gameState.pokemons.find(pokemon => pokemon.id === id);
+
+        if (pressedPokemon.isPressed) {
+            // You lost! Display lost message, set status to "lost", create a restart button
+            dispatch({
+                type: "lost-game"
+            });
+        } else {
+            // init nextScore, check if it equals to 12 ? Display won message, set status to "won", create restart button
+            const nextScore = gameState.currentScore + 1;
+            if (nextScore === 12) {
+                dispatch({
+                    type: "won-game"
+                });
+            } else {
+                // toggle pressed pockemon status in gameState, set currentScore and highScore, shuffle cards
+                dispatch({
+                    type: "game-goes-on",
+                    pressedPokemonId: id,
+                    score: nextScore
+                });
+            };
+        };
+
+        // dispatch({
+        //     type: "card-clicked",
+        //     pressedId: id
+        // });
         
     };
 
-    function handleCardShuffle(cards) {
-        const copy = [...cards];
-        for (let i = copy.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [copy[i], copy[j]] = [copy[j], copy[i]];
-        }
-        return copy;
-    }
+   
     
     return {
         gameState,
