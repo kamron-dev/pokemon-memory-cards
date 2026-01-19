@@ -1,7 +1,7 @@
 import './App.css'
 import PropTypes from 'prop-types';
 import useGameRules from '../useGameRules';
-// import { useEffect } from 'react';
+
 
 function MemoryCard({character, onClick}) {
   return (
@@ -51,92 +51,18 @@ function NameOfTheGame() {
   )
 };
 
-// const getRandomPokemon = async (id) => {
-//   const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`);
-//   const { name, sprites } = await res.json();
-//   const image = sprites.front_default;
-//   return { id, name, image, isPressed: false }
-// };
-
 
 export function App() {
   const { gameState, handleCardClick } = useGameRules();
   console.log(gameState)
   
-  
-  
-  // const addPoint = () => {
-
-  //   setScores(oldScores => {
-  //     let newCurrentScore = oldScores.currentScore + 1;
-  //     // let newBestScore = oldScores.bestScore + 1;
-      
-      
-  //     if (newCurrentScore === 12) {
-  //       alert("You won!");
-  //       endGame(); 
-  //     };
-  //     return {...oldScores, currentScore: newCurrentScore };
-      
-  //   });
-  // };
-  // function shuffleCards(cards) {
-  //     const copy = [...cards];
-  //     for (let i = copy.length - 1; i > 0; i--) {
-  //       const j = Math.floor(Math.random() * (i + 1));
-  //       [copy[i], copy[j]] = [copy[j], copy[i]];
-  //     }
-  //     return copy;
-  //   };
-
-  // const endGame = () => {
-  //   setScores(oldScore => {
-  //     return scores.currentScore > oldScore.bestScore ? { currentScore: 0, bestScore: scores.currentScore } : { ...oldScore, currentScore: 0 };
-  //   });
-  //   // refreshCards(); mark them as never pressed
-  //   (function refreshCards() {
-  //     setPokemonsData(oldData => {
-  //       return oldData.map(oldPokemon => {
-  //         return ({ ...oldPokemon, isPressed: false });
-  //       });
-  //     });
-  //   })();
-  //   // shuffleCards(); shuffle the order of the cards appearing in the container
-  //   setPokemonsData(oldArray => shuffleCards(oldArray));
-  // };
-
-  // const handleClick = (id) => {
-  //   const pressedPokemon = pokemonsData.find(pokemon => {
-  //     return pokemon.id === id;
-  //   });
-  //   if (pressedPokemon.isPressed) {
-  //     //handle endgame
-  //     alert("You lost!");
-  //     endGame();
-      
-  //   } else {
-  //     setPokemonsData(oldArray => {
-  //       return oldArray.map(pokemon => {
-  //         return pokemon.id === pressedPokemon.id ? { ...pressedPokemon, isPressed: !pressedPokemon.isPressed } : pokemon;
-  //       });
-  //     });
-      
-  //     addPoint();
-  //     // check if win();
-  //     // shuffleCards();
-  //     setPokemonsData(oldArray => shuffleCards(oldArray));
-  //   };
-  // };
-  
-
-
   return (
     <div id="game">
       <NameOfTheGame />
       <ScoreBoard current={gameState.currentScore} top={gameState.highScore} />
-      {gameState.status === "won" && <h1 class="endGame">You won!</h1>}
+      {gameState.status === "won" && <h1 className="endGame">You won!</h1>}
       {gameState.status === "playing" && <MemoryCardContainer onClick={handleCardClick} pokemons={gameState.pokemons}/>}
-      {gameState.status === "lost" && <h1 class="endGame">You lost...</h1>}
+      {gameState.status === "lost" && <h1 className="endGame">You lost...</h1>}
     </div>
   )
   
