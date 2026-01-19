@@ -5,46 +5,12 @@ function gameDispatcher(state, action) {
         // save pokemons either from localStorage or fetch
         case "save-pokemons":
             return { ...state, pokemons: action.data };
-        // when a card is pressed
-        // case "card-clicked":
-        //     {
-        //         const pressedPokemon = state.pokemons.find(pokemon => pokemon.id === action.pressedId);
-    
-        //         if (pressedPokemon.isPressed) {
-        //             // return lost state, lost screen with a restart button
-        //             return {
-        //                 ...state,
-        //                 status: "lost"
-        //             }
-        //         } else {
-        //             const nextScore = state.currentScore + 1;
-        //             if (nextScore === 12) {
-        //                 // return won state, won screen and restart button
-        //                 return {
-        //                     ...state,
-        //                     currentScore: 12,
-        //                     highScore: 12,
-        //                     status: "won"
-        //                 }
-        //             } else {
-        //                 return {
-        //                     ...state,
-        //                     pokemons: state.pokemons.map(pokemon => {
-        //                         return pokemon.id === pressedPokemon.id ? { ...pokemon, isPressed: !pokemon.isPressed } : pokemon;
-        //                     }),
-        //                     currentScore: nextScore,
-        //                     highScore: Math.max(nextScore, state.highScore)
-        //                 };
-
-        //             }
-        //         }
-
-        //     }
+        
         case "lost-game":
             return {
                 ...state,
                 status: "lost"
-            }
+            };
         
         case "won-game":
             return {
@@ -52,20 +18,21 @@ function gameDispatcher(state, action) {
                 currentScore: 12,
                 highScore: 12,
                 status: "won"
-            }
+            };
+        
         case "game-goes-on":
             return {
-                ...state, 
+                ...state,
                 pokemons: state.pokemons.map(pokemon => {
                     return pokemon.id === action.pressedPokemonId ? { ...pokemon, isPressed: !pokemon.isPressed } : pokemon;
                 }),
                 currentScore: action.score,
                 highScore: Math.max(state.highScore, action.score)
-            }
+            };
             
-        
         default:
             return state;
+        
     }
 };
 
@@ -108,7 +75,7 @@ function useGameRules() {
                     const randomNum = Math.floor(Math.random() * POSSIBLE_POKEMONS + 1);
                     return getRandomPokemon(randomNum);
                   });
-                  const pokemonsList = await Promise.all(promisesArray);
+                    const pokemonsList = await Promise.all(promisesArray);
                     //   setPokemons(pokemonsList);
                     dispatch({
                         type: "save-pokemons",
@@ -152,11 +119,6 @@ function useGameRules() {
                 });
             };
         };
-
-        // dispatch({
-        //     type: "card-clicked",
-        //     pressedId: id
-        // });
         
     };
 
