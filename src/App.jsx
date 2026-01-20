@@ -60,7 +60,7 @@ function EndScreen({ children }) {
 };
 
 
-function App({OnButtonClick}) {
+function App({OnButtonClick, OnRefreshPokemons}) {
   const { gameState, handleCardClick } = useGameRules();
   console.log(gameState)
   
@@ -68,8 +68,8 @@ function App({OnButtonClick}) {
     <div id="game">
       <NameOfTheGame />
       <ScoreBoard current={gameState.currentScore} top={gameState.highScore} />
-      {gameState.status === "lost" && <EndScreen><h1>You lost...</h1> <button id="restart-button" onClick={OnButtonClick}><h3>Restart</h3></button></EndScreen>}
-      {gameState.status === "won" && <EndScreen><h1>You won!</h1> <button id="restart-button" onClick={OnButtonClick}><h3>Restart</h3></button></EndScreen>}
+      {gameState.status === "lost" && <EndScreen><h1>You lost...</h1> <button id="restart-button" onClick={OnButtonClick}><h3>Restart</h3></button><button onClick={OnRefreshPokemons}><h3>Load new pokemons</h3></button></EndScreen>}
+      {gameState.status === "won" && <EndScreen><h1>You won!</h1> <button id="restart-button" onClick={OnButtonClick}><h3>Restart</h3></button> <button onClick={OnRefreshPokemons}><h3>Load new pokemons</h3></button></EndScreen>}
       {gameState.status === "playing" && <MemoryCardContainer onClick={handleCardClick} pokemons={gameState.pokemons}/>}
     </div>
   )
@@ -79,9 +79,13 @@ function App({OnButtonClick}) {
 export function GameRoot() {
   const [gameKey, setGameKey] = useState(0);
   const handleKeyChange = () => setGameKey(oldKey => oldKey + 1);
+  const handleFreshPokemons = () => {
+    setGameKey(oldKey => oldKey + 1);
+    localStorage.removeItem("pokemonsData");
+  };
 
   return (
-    <App key={gameKey} OnButtonClick = {handleKeyChange}></App>
+    <App key={gameKey} OnRefreshPokemons={handleFreshPokemons} OnButtonClick = {handleKeyChange}></App>
   )
 };
 
