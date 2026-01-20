@@ -6,6 +6,9 @@ function gameDispatcher(state, action) {
         case "save-pokemons":
             return { ...state, pokemons: action.data };
         
+        case "save-high-score":
+            return { ...state, highScore: action.score };
+        
         case "lost-game":
             return {
                 ...state,
@@ -93,6 +96,16 @@ function useGameRules() {
         getPokemons();
       
     }, []);
+
+    useEffect(() => {
+        const bestScoreFromLocalStorage = localStorage.getItem("bestScore");
+        if (bestScoreFromLocalStorage > gameState.highScore) {
+            dispatch({
+                type: "save-high-score",
+                score: bestScoreFromLocalStorage
+            })
+        }
+    })
     
 
     function handleCardClick(id) {
