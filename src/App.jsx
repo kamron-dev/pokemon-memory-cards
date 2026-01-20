@@ -68,9 +68,36 @@ function App({OnButtonClick, OnRefreshPokemons}) {
     <div id="game">
       <NameOfTheGame />
       <ScoreBoard current={gameState.currentScore} top={gameState.highScore} />
-      {gameState.status === "lost" && <EndScreen><h1>You lost...</h1> <button className="restart-button" onClick={OnButtonClick}><h3>Restart</h3></button><button className="restart-button" onClick={OnRefreshPokemons}><h3>New pokemons</h3></button></EndScreen>}
-      {gameState.status === "won" && <EndScreen><h1>You won!</h1> <button className="restart-button" onClick={OnButtonClick}><h3>Restart</h3></button> <button className="restart-button" onClick={OnRefreshPokemons}><h3>New pokemons</h3></button></EndScreen>}
-      {gameState.status === "playing" && <MemoryCardContainer onClick={handleCardClick} pokemons={gameState.pokemons}/>}
+      {gameState.status === "lost" && (
+        <EndScreen>
+          <h1>You lost...</h1>
+          <button className="restart-button" onClick={OnButtonClick}>
+            <h3>Restart</h3>
+          </button>
+          <button className="restart-button" onClick={OnRefreshPokemons}>
+            <h3>New pokemons</h3>
+          
+          </button>
+        
+        </EndScreen>
+      )}
+      {gameState.status === "won" && (
+        <EndScreen>
+          <h1>You won!</h1>
+          <button className="restart-button" onClick={OnButtonClick}>
+            <h3>Restart</h3>
+          
+          </button>
+          <button className="restart-button" onClick={OnRefreshPokemons}>
+            <h3>New pokemons</h3>
+          
+          </button>
+        
+        </EndScreen>
+      )}
+      {gameState.status === "playing" && (
+        <MemoryCardContainer onClick={handleCardClick} pokemons={gameState.pokemons}/>
+      )}
     </div>
   )
   
