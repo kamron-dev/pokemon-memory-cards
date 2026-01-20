@@ -92,13 +92,18 @@ function useGameRules() {
         };
         getPokemons();
       
-      }, []);
+    }, []);
+    
 
     function handleCardClick(id) {
         const pressedPokemon = gameState.pokemons.find(pokemon => pokemon.id === id);
 
         if (pressedPokemon.isPressed) {
             // You lost! Display lost message, set status to "lost", create a restart button
+            const bestScoreFromLocal = localStorage.getItem("bestScore");
+            if (gameState.highScore > bestScoreFromLocal) {
+                localStorage.setItem("bestScore", gameState.highScore);
+            }
             dispatch({
                 type: "lost-game"
             });
@@ -106,6 +111,7 @@ function useGameRules() {
             // init nextScore, check if it equals to 12 ? Display won message, set status to "won", create restart button
             const nextScore = gameState.currentScore + 1;
             if (nextScore === 12) {
+                localStorage.setItem("bestScore", nextScore);
                 dispatch({
                     type: "won-game"
                 });
