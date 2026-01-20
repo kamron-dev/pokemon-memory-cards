@@ -2,14 +2,10 @@
   max-width: 1280px;
   height: auto;
   margin: 0 auto;
-  /* padding: 2rem; */
   text-align: center;
-
   width: 100vw;
   height: auto;
-
   box-sizing: border-box;
-
   background-color: rgb(48, 53, 63);
 }
 
@@ -31,9 +27,7 @@
   grid-area: header;
   line-height: 0.2rem;
   height: 100%;
-  /* justify-self: start; */
   align-self: start;
-  /* border: 1px solid green; */
 }
 
 #header > * {
@@ -43,7 +37,6 @@
 
 #scoreboard {
   grid-area: scoreboard;
-  /* border: 1px solid blue; */
   height: 100%;
   color: white;
   display: flex;
@@ -53,12 +46,8 @@
 
 #card-container {
   grid-area: card-container;
-
-  /* border: 1px solid orange; */
   height: 110vh;
-  /* width: 100%; */
   padding: 15px;
-
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: auto;
@@ -70,11 +59,9 @@
   border-radius: 15px;
   width: 75%;
   height: 95%;
-  /* border: 1px solid purple; */
   background-color: rgb(197, 193, 189);
   justify-self: center;
   cursor: pointer;
-  /* box-shadow: 0 0 5px rgb(214, 220, 139); */
   transition: box-shadow 0.5s ease, transform 120ms ease-in;
 
 }
@@ -95,7 +82,6 @@
 }
 
 #restart-button {
-  /* appearance: none; */
   all: unset;
   cursor: pointer;
   color: rgb(48, 53, 63);
