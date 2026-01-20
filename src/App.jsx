@@ -1,6 +1,6 @@
 import './App.css'
 import PropTypes from 'prop-types';
-import useGameRules from '../useGameRules';
+import useGameRules from './useGameRules';
 
 
 function MemoryCard({character, onClick}) {
