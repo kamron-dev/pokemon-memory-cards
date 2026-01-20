@@ -50,6 +50,14 @@ function NameOfTheGame() {
   )
 };
 
+function EndScreen({ children }) {
+  return (
+    <div className="endGame">
+      {children}
+    </div>
+  )
+}
+
 
 export function App() {
   const { gameState, handleCardClick } = useGameRules();
@@ -59,9 +67,9 @@ export function App() {
     <div id="game">
       <NameOfTheGame />
       <ScoreBoard current={gameState.currentScore} top={gameState.highScore} />
-      {gameState.status === "won" && <h1 className="endGame">You won!</h1>}
+      {gameState.status === "lost" && <EndScreen><h1>You lost...</h1></EndScreen>}
+      {gameState.status === "won" && <EndScreen><h1>You won!</h1></EndScreen>}
       {gameState.status === "playing" && <MemoryCardContainer onClick={handleCardClick} pokemons={gameState.pokemons}/>}
-      {gameState.status === "lost" && <h1 className="endGame">You lost...</h1>}
     </div>
   )
   

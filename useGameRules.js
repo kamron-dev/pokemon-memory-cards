@@ -76,7 +76,6 @@ function useGameRules() {
                     return getRandomPokemon(randomNum);
                   });
                     const pokemonsList = await Promise.all(promisesArray);
-                    //   setPokemons(pokemonsList);
                     dispatch({
                         type: "save-pokemons",
                         data: pokemonsList
@@ -87,7 +86,7 @@ function useGameRules() {
                   console.error(err);
                 };
 
-            }
+            };
     
           
         };
