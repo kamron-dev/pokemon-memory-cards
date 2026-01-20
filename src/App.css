@@ -79,8 +79,7 @@
 .endGame {
   color: white;
 }
-
-#restart-button {
+.restart-button {
   all: unset;
   cursor: pointer;
   color: rgb(48, 53, 63);
@@ -88,10 +87,11 @@
   border-radius: 15px;
   width: 10rem;
   height: 4rem;
+  margin: 5px;
   transition: box-shadow 0.5s ease, transform 120ms ease-in;
 }
 
-#restart-button:hover {
+.restart-button:hover {
   box-shadow: 0 5px 25px rgb(190, 191, 70);
   transform: scale(105%);
 }
