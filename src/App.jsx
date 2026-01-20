@@ -68,8 +68,8 @@ function App({OnButtonClick}) {
     <div id="game">
       <NameOfTheGame />
       <ScoreBoard current={gameState.currentScore} top={gameState.highScore} />
-      {gameState.status === "lost" && <EndScreen><h1>You lost...</h1> <button onClick={OnButtonClick}>Restart game</button></EndScreen>}
-      {gameState.status === "won" && <EndScreen><h1>You won!</h1></EndScreen>}
+      {gameState.status === "lost" && <EndScreen><h1>You lost...</h1> <button id="restart-button" onClick={OnButtonClick}>Restart game</button></EndScreen>}
+      {gameState.status === "won" && <EndScreen><h1>You won!</h1> <button id="restart-button" onClick={OnButtonClick}>Restart game</button></EndScreen>}
       {gameState.status === "playing" && <MemoryCardContainer onClick={handleCardClick} pokemons={gameState.pokemons}/>}
     </div>
   )
