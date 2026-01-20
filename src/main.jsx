@@ -1,12 +1,14 @@
-import { StrictMode, useState } from 'react'
+import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
-import { App } from './App.jsx'
+import { GameRoot } from './App.jsx'
 
-const resetKey = useState(0)
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <App />
+    
+    <GameRoot></GameRoot>
+
+    
   </StrictMode>,
 )

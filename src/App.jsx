@@ -1,6 +1,7 @@
 import './App.css'
 import PropTypes from 'prop-types';
 import useGameRules from './useGameRules';
+import { useState } from 'react';
 
 
 function MemoryCard({character, onClick}) {
@@ -56,10 +57,10 @@ function EndScreen({ children }) {
       {children}
     </div>
   )
-}
+};
 
 
-export function App() {
+function App({OnButtonClick}) {
   const { gameState, handleCardClick } = useGameRules();
   console.log(gameState)
   
@@ -67,12 +68,21 @@ export function App() {
     <div id="game">
       <NameOfTheGame />
       <ScoreBoard current={gameState.currentScore} top={gameState.highScore} />
-      {gameState.status === "lost" && <EndScreen><h1>You lost...</h1></EndScreen>}
+      {gameState.status === "lost" && <EndScreen><h1>You lost...</h1> <button onClick={OnButtonClick}>Restart game</button></EndScreen>}
       {gameState.status === "won" && <EndScreen><h1>You won!</h1></EndScreen>}
       {gameState.status === "playing" && <MemoryCardContainer onClick={handleCardClick} pokemons={gameState.pokemons}/>}
     </div>
   )
   
+};
+
+export function GameRoot() {
+  const [gameKey, setGameKey] = useState(0);
+  const handleKeyChange = () => setGameKey(oldKey => oldKey + 1);
+
+  return (
+    <App key={gameKey} OnButtonClick = {handleKeyChange}></App>
+  )
 };
 
 MemoryCard.propTypes = {
