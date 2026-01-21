@@ -74,9 +74,13 @@ function useGameRules() {
                 });
             } else {
                 try {
-                  const promisesArray = Array.from({ length: 12 }, () => {
-                    const randomNum = Math.floor(Math.random() * POSSIBLE_POKEMONS + 1);
-                    return getPokemon(randomNum);
+                    const promisesArray = Array.from({ length: 12 }, () => {
+                        const uniqueArray = [];
+                        const randomNum = Math.floor(Math.random() * POSSIBLE_POKEMONS + 1);
+                        if (!uniqueArray.includes(randomNum)) {
+                            uniqueArray.push(randomNum);    
+                            return getPokemon(randomNum);
+                        }; 
                   });
                     const pokemonsList = await Promise.all(promisesArray);
                     dispatch({
@@ -152,19 +156,4 @@ function useGameRules() {
 
 export default useGameRules;
 
-function createUniqueArray(arrayLength) {
-    const POSSIBLE_POKEMONS = 721;
-    const uniqueArray = [];
-
-    while (uniqueArray.length < arrayLength) {
-        const randomNum = Math.floor(Math.random() * POSSIBLE_POKEMONS + 1); 
-        // uniqueArray.includes(randomNum) ? null : uniqueArray.push(randomNum);
-        if (!uniqueArray.includes(randomNum)) {
-            uniqueArray.push(randomNum);
-        }
-        
-    };
-
-    return uniqueArray;
-};
 
