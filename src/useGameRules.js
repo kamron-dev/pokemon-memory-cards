@@ -48,7 +48,7 @@ function handleCardShuffle(cards) {
     return copy;
 }
 
-const getRandomPokemon = async (id) => {
+const getPokemon = async (id) => {
   const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`);
   const { name, sprites } = await res.json();
   const image = sprites.front_default;
@@ -76,7 +76,7 @@ function useGameRules() {
                 try {
                   const promisesArray = Array.from({ length: 12 }, () => {
                     const randomNum = Math.floor(Math.random() * POSSIBLE_POKEMONS + 1);
-                    return getRandomPokemon(randomNum);
+                    return getPokemon(randomNum);
                   });
                     const pokemonsList = await Promise.all(promisesArray);
                     dispatch({
@@ -151,3 +151,20 @@ function useGameRules() {
 };
 
 export default useGameRules;
+
+function createUniqueArray(arrayLength) {
+    const POSSIBLE_POKEMONS = 721;
+    const uniqueArray = [];
+
+    while (uniqueArray.length < arrayLength) {
+        const randomNum = Math.floor(Math.random() * POSSIBLE_POKEMONS + 1); 
+        // uniqueArray.includes(randomNum) ? null : uniqueArray.push(randomNum);
+        if (!uniqueArray.includes(randomNum)) {
+            uniqueArray.push(randomNum);
+        }
+        
+    };
+
+    return uniqueArray;
+};
+

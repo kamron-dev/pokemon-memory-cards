@@ -62,7 +62,7 @@ function EndScreen({ children }) {
 
 function App({OnButtonClick, OnRefreshPokemons}) {
   const { gameState, handleCardClick } = useGameRules();
-  console.log(gameState)
+  // console.log(gameState)
   
   return (
     <div id="game">
@@ -129,4 +129,4 @@ MemoryCardContainer.propTypes = {
 ScoreBoard.propTypes = {
   current: PropTypes.string,
   top: PropTypes.string
-}
+};
