@@ -127,5 +127,6 @@ MemoryCardContainer.propTypes = {
 };
 
 ScoreBoard.propTypes = {
-  scores: PropTypes.string
+  current: PropTypes.string,
+  top: PropTypes.string
 }
