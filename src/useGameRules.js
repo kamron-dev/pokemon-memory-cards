@@ -74,14 +74,15 @@ function useGameRules() {
                 });
             } else {
                 try {
-                    const promisesArray = Array.from({ length: 12 }, () => {
-                        const uniqueArray = [];
+                    const uniqueArray = [];
+                    while (uniqueArray.length < 12) {
                         const randomNum = Math.floor(Math.random() * POSSIBLE_POKEMONS + 1);
                         if (!uniqueArray.includes(randomNum)) {
-                            uniqueArray.push(randomNum);    
-                            return getPokemon(randomNum);
-                        }; 
-                  });
+                            uniqueArray.push(randomNum);
+                        };
+
+                    }
+                    const promisesArray = uniqueArray.map(id => getPokemon(id));
                     const pokemonsList = await Promise.all(promisesArray);
                     dispatch({
                         type: "save-pokemons",
