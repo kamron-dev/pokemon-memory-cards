@@ -74,16 +74,12 @@ function useGameRules() {
                 });
             } else {
                 try {
-                    const uniqueArray = [];
-                    while (uniqueArray.length < 12) {
-                        const randomNum = Math.floor(Math.random() * POSSIBLE_POKEMONS + 1);
-                        if (!uniqueArray.includes(randomNum)) {
-                            uniqueArray.push(randomNum);
-                        };
-
-                    }
-                    const promisesArray = uniqueArray.map(id => getPokemon(id));
-                    const pokemonsList = await Promise.all(promisesArray);
+                    const uniqueArray = new Set();
+                    while (uniqueArray.size < 12) {
+                        uniqueArray.add(Math.floor(Math.random() * POSSIBLE_POKEMONS + 1));
+                
+                    };
+                    const pokemonsList = await Promise.all([...uniqueArray].map(getPokemon)); 
                     dispatch({
                         type: "save-pokemons",
                         data: pokemonsList
