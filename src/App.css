@@ -176,6 +176,12 @@ div#scoreboard {
   align-self: center;
 }
 
-.endGame {
-  color: white;
+.endGame>button {
+  all: unset;
+  color: var(--main-color);
+  background-color: rgb(197, 193, 189);
+  margin: 15px;
+  border-radius: 15px;
+  width: 10rem;
+  text-align: center;
 }
