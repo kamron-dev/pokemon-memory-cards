@@ -151,7 +151,7 @@ div#scoreboard {
 #game {
   display: flex;
   flex-direction: column;
-
+  
 
 
 }
@@ -163,6 +163,11 @@ div#scoreboard {
   gap: 15px;
   padding: 15px;
   cursor: pointer;
+  max-width: 1024px;
+
+  width: 100%;
+  
+  margin-inline: auto;
 }
 
 .pokemon-card {
@@ -184,4 +189,32 @@ div#scoreboard {
   border-radius: 15px;
   width: 10rem;
   text-align: center;
+}
+
+@media (min-width: 768px) {
+  #card-container {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+
+  #card-container {
+    grid-template-columns: repeat(4, 1fr);
+
+  };
+
+  .pokemon-card {
+    transition: box-shadow 2s ease, transform 2s ease-in;
+  }
+
+  .pokemon-card:hover,
+  .restart-button:hover {
+    box-shadow: 0 5px 25px rgb(190, 191, 70);
+    transform: scale(105%);
+  }
+  
+  button, .pokemon-card {
+    cursor: pointer;
+  };
 }
