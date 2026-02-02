@@ -45,7 +45,8 @@ function NameOfTheGame() {
   return (
     <div id="header">
       <h1>Memory Game</h1>
-      <h3>Get points by clicking on images. Do not click on an image twice!</h3>
+      <h3>Get points by clicking on images.</h3>
+      <h3> Do not click on an image twice!</h3>
         
     </div>
   )
@@ -66,7 +67,7 @@ function App({OnButtonClick, OnRefreshPokemons}) {
   
   return (
     <div id="game">
-      {/* <NameOfTheGame /> */}
+      <NameOfTheGame />
       <ScoreBoard current={gameState.currentScore} top={gameState.highScore} />
       {gameState.status === "lost" && (
         <EndScreen>
