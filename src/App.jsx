@@ -108,8 +108,8 @@ export function GameRoot() {
   const [gameKey, setGameKey] = useState(0);
   const handleKeyChange = () => setGameKey(oldKey => oldKey + 1);
   const handleFreshPokemons = () => {
-    setGameKey(oldKey => oldKey + 1);
     localStorage.removeItem("pokemonsData");
+    setGameKey(oldKey => oldKey + 1);
   };
 
   return (
