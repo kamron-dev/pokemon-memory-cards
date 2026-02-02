@@ -66,7 +66,7 @@ function App({OnButtonClick, OnRefreshPokemons}) {
   
   return (
     <div id="game">
-      <NameOfTheGame />
+      {/* <NameOfTheGame /> */}
       <ScoreBoard current={gameState.currentScore} top={gameState.highScore} />
       {gameState.status === "lost" && (
         <EndScreen>
