@@ -148,3 +148,13 @@ body {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
 }
+
+.pokemon-card {
+  display: flex;
+  flex-direction: column;
+}
+
+.pokemon-card>h3 {
+  align-self: center;
+}
+
